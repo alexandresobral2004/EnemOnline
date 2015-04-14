@@ -53,7 +53,7 @@ public class JPAUtil {
     
     public <T> List<T> getList(Class <T> classToClass,String jpql, Object... parameters){
         List toReturn = null;
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         Query qr = em.createQuery(jpql);
                                                                                                                                                                                  for(int i=0;i< parameters.length;i++){
             qr.setParameter(i+1,parameters[i]);
@@ -66,7 +66,7 @@ public class JPAUtil {
     }
     
     public <T>  T getEntity(Class<T> entityClass,Serializable pk){
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         T toReturn = em.find(entityClass, pk);
        
         return toReturn;
@@ -74,7 +74,7 @@ public class JPAUtil {
     
     
     public <T> List<T> getEntitiesById(Class<T> entityClass,String jpql, int id){
-        EntityManager em = getEntityManager();
+         em = getEntityManager();
         List toReturn = null;
         Query query = em.createNativeQuery(jpql, entityClass);
         query.setParameter("id", id);
@@ -85,7 +85,7 @@ public class JPAUtil {
     }
     
       public <T> List<T> getEscolasByMunic(Class<T> entityClass,String jpql, int mun){
-        EntityManager em = getEntityManager();
+      em = getEntityManager();
         List toReturn = null;
         Query query = em.createNativeQuery(jpql, entityClass);
         query.setParameter("mun", mun);
@@ -96,7 +96,7 @@ public class JPAUtil {
     }
     
       public <T> List<T> getEntitiesByEstado(Class<T> entityClass,String jpql, String estado){
-        EntityManager em = getEntityManager();
+         em = getEntityManager();
         List toReturn = null;
         Query query = em.createNativeQuery(jpql, entityClass);
         query.setParameter("estado", estado);
@@ -109,7 +109,7 @@ public class JPAUtil {
     
     
       public <T> List<T> getIstituicaoByInep(Class<T> entityClass,String jpql,String inep){
-        EntityManager em = getEntityManager();
+         em = getEntityManager();
          List toReturn = null;
         Query query =  em.createNativeQuery(jpql, entityClass);
         query.setParameter("inep", inep);
@@ -119,7 +119,7 @@ public class JPAUtil {
     }
       
       public <T>  T getUserByLogin(Class<T> entityClass,String jpql,String username){
-        EntityManager em = getEntityManager();
+       em = getEntityManager();
         T toReturn  = null;
         Query query = em.createNativeQuery(jpql, entityClass);
         query.setParameter("username", username);
@@ -127,7 +127,7 @@ public class JPAUtil {
         return toReturn;
     }
     public <T> List  <T> getUsersByLogin(Class<T> entityClass,String jpql,String username){
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         List  toReturn  = null;
         Query query = em.createNativeQuery(jpql, entityClass);
         query.setParameter("username", username);
@@ -136,7 +136,7 @@ public class JPAUtil {
     }
     
     public <T> List  <T> getEntradasByUser(Class<T> entityClass,String jpql,int usuario_id){
-        EntityManager em = getEntityManager();
+         em = getEntityManager();
         List  toReturn  = null;
         Query query = em.createNativeQuery(jpql, entityClass);
         query.setParameter("usuario_id",usuario_id);
@@ -145,7 +145,7 @@ public class JPAUtil {
     }
     
      public <T> List  <T> getEscolasByMun(Class<T> entityClass,String jpql,int id){
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         List  toReturn  = null;
         Query query = em.createQuery(jpql);
         query.setParameter("id",id);
@@ -154,7 +154,7 @@ public class JPAUtil {
     }
      
      public <T> List <T> getVisitasporDatas(Class<T> entityClass,String jpql,Date data_inicial,Date data_final){
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         List toReturn = null;
         Query query = em.createQuery(jpql);
         query.setParameter("data_inicial", data_inicial,TemporalType.DATE);
@@ -166,7 +166,7 @@ public class JPAUtil {
      }
      
       public <T> List <T> getRelatorioporDatas(Class<T> entityClass,String jpql,java.sql.Date data_inicial,java.sql.Date data_final){
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         List toReturn = null;
         Query query = em.createQuery(jpql);
         query.setParameter("data_inicial", data_inicial,TemporalType.DATE);
@@ -178,7 +178,7 @@ public class JPAUtil {
      }
 
        public <T> List <T> getRelatorioporID(Class<T> entityClass,String jpql,int id){
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         List toReturn = null;
         Query query = em.createQuery(jpql);
         query.setParameter("id", id);
@@ -192,7 +192,7 @@ public class JPAUtil {
       
     
        public <T> List<T> getAlunosByVisita(Class<T> entityClass,String jpql,int visita_id){
-        EntityManager em = getEntityManager();
+         em = getEntityManager();
          List toReturn = null;
         Query query =  em.createQuery(jpql);
          query.setParameter("visita_id", visita_id);
