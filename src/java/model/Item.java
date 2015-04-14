@@ -11,13 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author cedsobral
  */
 @Entity
-public class itemQuestao implements Serializable{
+public class Item implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,6 +29,11 @@ public class itemQuestao implements Serializable{
     @Column(columnDefinition = "mediumblob",nullable = true)
     private byte[] imagem;
     private Boolean resposta;
+    @ManyToOne()
+    private Questao questao;
+    
+    
+    
 
     public int getId() {
         return id;
@@ -92,7 +98,7 @@ public class itemQuestao implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final itemQuestao other = (itemQuestao) obj;
+        final Item other = (Item) obj;
         if (this.id != other.id) {
             return false;
         }

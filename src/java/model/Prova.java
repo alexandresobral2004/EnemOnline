@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,7 +22,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "prova")
-public class prova implements Serializable{
+public class Prova implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +30,10 @@ public class prova implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date dataProva;
     private String nomeAluno;
+    @OneToMany()
+    private Questao questao;
+
+    
 
     public int getId() {
         return id;
@@ -53,6 +58,37 @@ public class prova implements Serializable{
     public void setNomeAluno(String nomeAluno) {
         this.nomeAluno = nomeAluno;
     }
+    
+   public Questao getQuestao() {
+        return questao;
+    }
+
+    public void setQuestao(Questao questao) {
+        this.questao = questao;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 83 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Prova other = (Prova) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
     
