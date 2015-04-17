@@ -27,13 +27,9 @@ public class Prova implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Temporal(TemporalType.DATE)
-    private Date dataProva;
-    private String nomeAluno;
+    
     @OneToMany()
     private Questao questao;
-
-    
 
     public int getId() {
         return id;
@@ -43,23 +39,7 @@ public class Prova implements Serializable{
         this.id = id;
     }
 
-    public Date getDataProva() {
-        return dataProva;
-    }
-
-    public void setDataProva(Date dataProva) {
-        this.dataProva = dataProva;
-    }
-
-    public String getNomeAluno() {
-        return nomeAluno;
-    }
-
-    public void setNomeAluno(String nomeAluno) {
-        this.nomeAluno = nomeAluno;
-    }
-    
-   public Questao getQuestao() {
+    public Questao getQuestao() {
         return questao;
     }
 

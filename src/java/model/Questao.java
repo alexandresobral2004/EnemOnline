@@ -6,34 +6,46 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author cedsobral
  */
 @Entity
+@Table(name = "questao")
 public class Questao implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String texto;
-    private String numQuestao;
+    private long numQuestao;
+    @Column(columnDefinition = "mediumblob",nullable = true)
+    private byte[] imagem;
     @ManyToOne()
     private Prova prova;
     @OneToMany(cascade = CascadeType.REMOVE)
     private Item item;
 
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+
    
-    
-    
 
     public int getId() {
         return id;
@@ -51,14 +63,17 @@ public class Questao implements Serializable{
         this.texto = texto;
     }
 
-    public String getNumQuestao() {
+    public long getNumQuestao() {
         return numQuestao;
     }
 
-    public void setNumQuestao(String numQuestao) {
+    public void setNumQuestao(long numQuestao) {
+        
+        
         this.numQuestao = numQuestao;
     }
 
+    
     public Prova getProva() {
         return prova;
     }
@@ -76,6 +91,26 @@ public class Questao implements Serializable{
         this.item = item;
     }
 
+    
+    //Busca numero de questoes no banco
+    private int findNumQuestoes(){
+        int qtde = 0;
+        return qtde;
+    }
+    //incrementa a quantidade de questões
+    private void IncNumQuestao(){
+       int qtde = findNumQuestoes();
+       
+        if(qtde == 0){
+            this.numQuestao = 1;
+        }
+        else{
+            
+            this.numQuestao= qtde + 1;
+        }
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;

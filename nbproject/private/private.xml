@@ -3,17 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/Util/JPAUtil.java</file>
             <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/dao/QuestaoDAO.java</file>
             <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/web/pages/questao.xhtml</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/managedBean/provaFaces.java</file>
             <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/model/Prova.java</file>
-            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/dao/ProvaDAO.java</file>
-            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/model/Item.java</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/web/WEB-INF/faces-config.xml</file>
             <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/web/WEB-INF/web.xml</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/web/resources/css/cssLayout.css</file>
             <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/model/Questao.java</file>
             <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/dao/ItemDAO.java</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/managedBean/questaoFaces.java</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/web/index.xhtml</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/Util/JPAUtil.java</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/web/WEB-INF/componentes/meuComponente.xhtml</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/dao/ProvaDAO.java</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/model/Item.java</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/web/resources/css/default.css</file>
             <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/conf/persistence.xml</file>
             <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/web/Template.xhtml</file>
+            <file>file:/Users/cedsobral/NetBeansProjects/EnemOnline/src/java/managedBean/itemFaces.java</file>
         </group>
     </open-files>
 </project-private>

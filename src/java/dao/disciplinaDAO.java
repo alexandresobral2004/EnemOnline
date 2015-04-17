@@ -9,39 +9,37 @@ import Util.JPAUtil;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import model.Questao;
+import model.Disciplina;
 
 /**
  *
  * @author cedsobral
  */
 @Stateless
-public class QuestaoDAO {
-   
+public class disciplinaDAO {
     
-    public void addquestao(Questao questao){
+    
+    public void adddisciplina(Disciplina disciplina){
         EntityManager em = JPAUtil.getInstance().getEntityManager();
-        em.persist(questao);
+        em.persist(disciplina);
     }
     
-    public void editQuestao(Questao questao){
+    public void editDisciplina(Disciplina disciplina){
         EntityManager em = JPAUtil.getInstance().getEntityManager();
-        em.merge(questao);
+        em.merge(disciplina);
     }
-    public void delQuestao(Questao questao){
+    public void delDisciplina(Disciplina disciplina){
         EntityManager em = JPAUtil.getInstance().getEntityManager();
-        Questao a = em.merge(questao);
+        Disciplina a = em.merge(disciplina);
         em.remove(a);
     }
     
-    public Questao getQuestaoByID(int id){
-        return JPAUtil.getInstance().getEntity(Questao.class, id);
+    public Disciplina getDisciplinaByID(int id){
+        return JPAUtil.getInstance().getEntity(Disciplina.class, id);
     }
     
-    public List<Questao> getAllQuestaos(){
-        return JPAUtil.getInstance().getList(Questao.class, "SELECT a FROM Questao a");
+    public List<Disciplina> getAllDisciplinas(){
+        return JPAUtil.getInstance().getList(Disciplina.class, "SELECT a FROM Disciplina a");
     }
   
-    
-    
 }

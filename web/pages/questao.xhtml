@@ -1,14 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-    <body>
+      <body>
 
         <ui:composition template="./../Template.xhtml">
 
             <ui:define name="content">
-                Teste
+                <f:view>
+                    <h:form id="questao">
+                        
+                        <h:panelGrid columns="2" id="pnlQuestao">
+                            <h:outputText value="Cód. Questão.:"/>
+                            <h:inputText value="#{provaFaces.selectedQuestao.numQuestao}"/>
+                            <h:outputText value="Descrição da Questão.:" />
+                            <h:inputTextarea value="#{provaFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
+                            <h:outputText value="Imagem ou texto? Se for imagem marque o checkbox.:"/>
+                            <h:selectBooleanCheckbox value="#{provaFaces.selectCheckbox}"  id="chkEnunciado" />
+                            <h:outputText value="Enunciado da questão.:"/>
+                            <p:fileUpload value="#{provaFaces.carregarArquivo}" mode="simple" sizeLimit="10000" allowTypes="*.jpg;*.png;*.gif" />
+                            
+                        </h:panelGrid>
+                    </h:form>
+                     
+                </f:view>
             </ui:define>
 
         </ui:composition>

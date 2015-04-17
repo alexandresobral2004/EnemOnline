@@ -9,6 +9,6 @@ package managedBean;
  *
  * @author cedsobral
  */
-public class itemBean {
+public class itemFaces {
     
 }
