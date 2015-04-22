@@ -6,27 +6,46 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 
-      <body>
+    <body>
 
         <ui:composition template="./../Template.xhtml">
 
             <ui:define name="content">
                 <f:view>
-                    <h:form id="questao">
-                        
+                    <h:form id="form">
+
                         <h:panelGrid columns="2" id="pnlQuestao">
+                            <f:facet name="header">
+                                Cadastro de Questões
+                            </f:facet>
                             <h:outputText value="Cód. Questão.:"/>
                             <h:inputText value="#{provaFaces.selectedQuestao.numQuestao}"/>
+                            <h:outputText value="Disciplina.:"/>
+                            <p:selectOneMenu value="#{provaFaces.selectedQuestao.disciplina}" converter="DisciplinaConverter" >
+                                
+                                <f:selectItems value="#{disciplinaFaces.findAllDisciplinas()}" var="dis" itemValue="#{dis}" itemLabel="#{dis.nome}"/>
+                            
+                            </p:selectOneMenu>
+                            
                             <h:outputText value="Descrição da Questão.:" />
                             <h:inputTextarea value="#{provaFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
-                            <h:outputText value="Imagem ou texto? Se for imagem marque o checkbox.:"/>
-                            <h:selectBooleanCheckbox value="#{provaFaces.selectCheckbox}"  id="chkEnunciado" />
-                            <h:outputText value="Enunciado da questão.:"/>
-                            <p:fileUpload value="#{provaFaces.carregarArquivo}" mode="simple" sizeLimit="10000" allowTypes="*.jpg;*.png;*.gif" />
-                            
+
+                            <h:outputText value="Selecione texto ou imagem como enunciado.:"/>
+
+                            <h:selectBooleanCheckbox value="#{provaFaces.selectCheckbox}"  id="chkEnunciado"  >
+                                <p:ajax listener="#{provaFaces.alteraComponente}" update="form:gridChecked"/>
+                            </h:selectBooleanCheckbox>
+                            <h:inputHidden />
+
+                        </h:panelGrid>
+                        <h:panelGrid id="gridChecked" columns="2">
+
+                            <p:inputTextarea value="#{provaFaces.selectedQuestao.texto}" rendered="#{provaFaces.renderCompText}" cols="50"/>
+
+                            <p:fileUpload value="#{provaFaces.carregarArquivo}" mode="simple" sizeLimit="10000" allowTypes="*.jpg;*.png;*.gif" id="mostrar" rendered="#{provaFaces.renderCompUpload}" />
                         </h:panelGrid>
                     </h:form>
-                     
+
                 </f:view>
             </ui:define>
 

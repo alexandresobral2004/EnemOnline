@@ -9,7 +9,6 @@ import java.util.Date;
 
 import java.util.List;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -21,8 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author alexandrerocha
  */
-@Singleton
-@Startup
+
 public class JPAUtil {
     
     private static JPAUtil me;

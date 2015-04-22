@@ -28,11 +28,22 @@ public class Item implements Serializable{
     private Boolean tipo;
     @Column(nullable = true)
     private String textoitemQuestao;
-    @Column(columnDefinition = "mediumblob",nullable = true)
+    @Column(nullable = true)
     private byte[] imagem;
     private Boolean resposta;
     @ManyToOne()
     private Questao questao;
+
+    public Questao getQuestao() {
+        return questao;
+    }
+
+    public void setQuestao(Questao questao) {
+        this.questao = questao;
+    }
+    
+    
+    
     
     
     

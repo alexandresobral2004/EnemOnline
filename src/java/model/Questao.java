@@ -6,15 +6,12 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Blob;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,12 +27,31 @@ public class Questao implements Serializable{
     private int id;
     private String texto;
     private long numQuestao;
-    @Column(columnDefinition = "mediumblob",nullable = true)
+    @Column(nullable = true)
     private byte[] imagem;
     @ManyToOne()
+    private Disciplina disciplina;
+    @ManyToOne()
     private Prova prova;
-    @OneToMany(cascade = CascadeType.REMOVE)
-    private Item item;
+
+    public Prova getProva() {
+        return prova;
+    }
+
+    public void setProva(Prova prova) {
+        this.prova = prova;
+    }
+    
+
+    
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
+    }
+    
 
     public byte[] getImagem() {
         return imagem;
@@ -74,23 +90,8 @@ public class Questao implements Serializable{
     }
 
     
-    public Prova getProva() {
-        return prova;
-    }
-
-    public void setProva(Prova prova) {
-        this.prova = prova;
-    }
     
     
-     public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
     
     //Busca numero de questoes no banco
     private int findNumQuestoes(){

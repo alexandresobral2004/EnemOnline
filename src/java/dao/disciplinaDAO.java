@@ -19,7 +19,7 @@ import model.Disciplina;
 public class disciplinaDAO {
     
     
-    public void adddisciplina(Disciplina disciplina){
+    public void adddisciplina(Disciplina disciplina) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         em.persist(disciplina);
     }
@@ -34,12 +34,12 @@ public class disciplinaDAO {
         em.remove(a);
     }
     
-    public Disciplina getDisciplinaByID(int id){
+    public Disciplina findDisciplinaByID(int id){
         return JPAUtil.getInstance().getEntity(Disciplina.class, id);
     }
     
-    public List<Disciplina> getAllDisciplinas(){
-        return JPAUtil.getInstance().getList(Disciplina.class, "SELECT a FROM Disciplina a");
+    public List<Disciplina> findAllDisciplinas(){
+        return JPAUtil.getInstance().getList(Disciplina.class, "SELECT d FROM Disciplina d");
     }
   
 }

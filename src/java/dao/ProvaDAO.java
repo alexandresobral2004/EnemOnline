@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
  *
  * @author cedsobral
  */
-@Stateless 
+@Stateless
 public class ProvaDAO {
     
     public void addProva(ProvaDAO prova){

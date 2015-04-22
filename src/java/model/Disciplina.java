@@ -6,7 +6,10 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,18 +22,18 @@ import javax.persistence.Table;
 @Table(name = "disciplina")
 public class Disciplina implements Serializable{
     @Id
-    private Long ID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer ID;
     private String nome;
-    @OneToMany()
-    private Questao questao;
+   
 
     
     
-    public Long getID() {
+    public Integer getID() {
         return ID;
     }
 
-    public void setID(Long ID) {
+    public void setID(Integer ID) {
         this.ID = ID;
     }
     
@@ -42,14 +45,29 @@ public class Disciplina implements Serializable{
         this.nome = nome;
     }
 
-    public Questao getQuestao() {
-        return questao;
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.ID);
+        return hash;
     }
 
-    public void setQuestao(Questao questao) {
-        this.questao = questao;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Disciplina other = (Disciplina) obj;
+        if (!Objects.equals(this.ID, other.ID)) {
+            return false;
+        }
+        return true;
     }
-    
+
+   
     
 
 }

@@ -36,7 +36,7 @@ public class provaFaces implements Serializable{
     private Item selectedItem_d;
     private Item selectedItem_e;
     
-    private Boolean selectCheckbox;
+    private Boolean selectCheckbox = false;
     private Boolean renderCompUpload = false;
     private Boolean renderCompText = false;
 
@@ -140,18 +140,21 @@ public class provaFaces implements Serializable{
     } 
     
     public provaFaces() {
-       
+        this.selectedProva = new Prova();
                 
         
     }
     
     
     public void alteraComponente(){
+        System.out.println("chamou altera componente");
         if(this.selectCheckbox == true){
             this.renderCompUpload = true;
+            this.renderCompText = false;
         }
         else{
             this.renderCompText = true;
+             this.renderCompUpload = false;
         }
     }
     
