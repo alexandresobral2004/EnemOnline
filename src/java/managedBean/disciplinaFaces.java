@@ -8,13 +8,10 @@ package managedBean;
 import dao.disciplinaDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
 import model.Disciplina;
 
 /**
@@ -29,7 +26,7 @@ public class disciplinaFaces implements Serializable{
     private List<Disciplina> disciplinas;
     
     
-    @Inject
+    @EJB
     private disciplinaDAO  disciDAO;
 
     

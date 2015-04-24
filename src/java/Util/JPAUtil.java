@@ -9,9 +9,11 @@ import java.util.Date;
 
 import java.util.List;
 import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author alexandrerocha
  */
-
+@Stateless
 public class JPAUtil {
     
     private static JPAUtil me;
@@ -29,6 +31,7 @@ public class JPAUtil {
     public JPAUtil() {
       
     }
+    
     
     
     public static JPAUtil getInstance(){
@@ -53,6 +56,7 @@ public class JPAUtil {
         List toReturn = null;
         em = getEntityManager();
         Query qr = em.createQuery(jpql);
+        
                                                                                                                                                                                  for(int i=0;i< parameters.length;i++){
             qr.setParameter(i+1,parameters[i]);
         }
@@ -124,6 +128,18 @@ public class JPAUtil {
         toReturn = (T) query.getSingleResult();
         return toReturn;
     }
+      
+      
+      public <T>  T getNumQuestao(Class<T> entityClass,String jpql){
+       em = getEntityManager();
+        T toReturn  = null;
+        Query query = em.createNativeQuery(jpql, entityClass);
+        toReturn = (T) query.getSingleResult();
+        return toReturn;
+    }
+      
+      
+      
     public <T> List  <T> getUsersByLogin(Class<T> entityClass,String jpql,String username){
         em = getEntityManager();
         List  toReturn  = null;
@@ -198,6 +214,8 @@ public class JPAUtil {
        
         return toReturn;
        }
+       
+       
        
       
       

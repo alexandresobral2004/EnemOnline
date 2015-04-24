@@ -41,6 +41,10 @@ public class QuestaoDAO {
     public List<Questao> getAllQuestaos(){
         return JPAUtil.getInstance().getList(Questao.class, "SELECT a FROM Questao a");
     }
+    
+    public Questao getNumQuestao(){
+        return JPAUtil.getInstance().getNumQuestao(Questao.class, "SELECT MAX(numquestao) FROM questao");   
+    }
   
     
     

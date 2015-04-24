@@ -7,6 +7,7 @@
     <class>model.Item</class>
     <class>model.Prova</class>
     <class>model.Questao</class>
+    <class>model.prova_questao</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
@@ -14,8 +15,8 @@
       <property name="hibernate.connection.datasource" value="jdbc/myDatasource"/>
       <property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JTATransactionFactory"/>
       <property name="hibernate.connection.autocommit" value="true"/>
-      <property name="javax.persistence.schema-generation.database.action" value="none"/>
       <property name="eclipselink.jdbc.native-sql" value="true"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

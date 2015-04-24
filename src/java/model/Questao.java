@@ -6,12 +6,16 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,25 +28,24 @@ public class Questao implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String texto;
-    private long numQuestao;
-    @Column(nullable = true)
-    private byte[] imagem;
+    private Integer numQuestao;
     @ManyToOne()
     private Disciplina disciplina;
-    @ManyToOne()
-    private Prova prova;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "questao_id")
+    private List<Item> itens;
 
-    public Prova getProva() {
-        return prova;
+    public List<Item> getItens() {
+        return itens;
     }
 
-    public void setProva(Prova prova) {
-        this.prova = prova;
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
     }
     
-
+    
     
     public Disciplina getDisciplina() {
         return disciplina;
@@ -51,25 +54,18 @@ public class Questao implements Serializable{
     public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
     }
-    
-
-    public byte[] getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
-    }
 
    
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
+    
+
 
     public String getTexto() {
         return texto;
@@ -79,18 +75,16 @@ public class Questao implements Serializable{
         this.texto = texto;
     }
 
-    public long getNumQuestao() {
+    public Integer getNumQuestao() {
         return numQuestao;
     }
 
-    public void setNumQuestao(long numQuestao) {
-        
-        
+    public void setNumQuestao(Integer numQuestao) {
         this.numQuestao = numQuestao;
     }
 
     
-    
+
     
     
     //Busca numero de questoes no banco

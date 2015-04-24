@@ -12,38 +12,59 @@
 
             <ui:define name="content">
                 <f:view>
-                    <h:form id="form">
+                    <h:form id="form" enctype="multipart/form-data">
 
                         <h:panelGrid columns="2" id="pnlQuestao">
                             <f:facet name="header">
                                 Cadastro de Questões
                             </f:facet>
                             <h:outputText value="Cód. Questão.:"/>
-                            <h:inputText value="#{provaFaces.selectedQuestao.numQuestao}"/>
+                            <h:inputText value="#{questaoFaces.selectedQuestao.numQuestao}"/>
                             <h:outputText value="Disciplina.:"/>
-                            <p:selectOneMenu value="#{provaFaces.selectedQuestao.disciplina}" converter="DisciplinaConverter" >
-                                
+                            <p:selectOneMenu value="#{questaoFaces.selectedQuestao.disciplina}" converter="DisciplinaConverter" >
+
                                 <f:selectItems value="#{disciplinaFaces.findAllDisciplinas()}" var="dis" itemValue="#{dis}" itemLabel="#{dis.nome}"/>
-                            
+
                             </p:selectOneMenu>
-                            
+
                             <h:outputText value="Descrição da Questão.:" />
-                            <h:inputTextarea value="#{provaFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
+                            <h:inputTextarea value="#{questaoFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
 
-                            <h:outputText value="Selecione texto ou imagem como enunciado.:"/>
-
-                            <h:selectBooleanCheckbox value="#{provaFaces.selectCheckbox}"  id="chkEnunciado"  >
-                                <p:ajax listener="#{provaFaces.alteraComponente}" update="form:gridChecked"/>
-                            </h:selectBooleanCheckbox>
-                            <h:inputHidden />
 
                         </h:panelGrid>
-                        <h:panelGrid id="gridChecked" columns="2">
+                        <p:fieldset legend="Item a" toggleable="true" toggleSpeed="500">
+                            <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}"  />
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <f:facet name="header">
+                                    Insira uma imagem ou o texto relativo ao ítem (a) da questão
+                                </f:facet>
+                                <h:outputText value="Item da Questão.:" />
+                                <p:inputText value="#{questaoFaces.selectedItem.item}"  size="1" maxlength="1"/>
+                                <h:outputText value="Item Correto?"/>
+                                <p:selectBooleanCheckbox value="#{questaoFaces.selectedItem.resposta}" />
+                                <h:inputHidden/><h:inputHidden/>
+                                <p:inputTextarea value="#{questaoFaces.selectedItem.textoitemQuestao}"  cols="50" id="input"/>
+                           
+                                <p:fileUpload fileUploadListener="#{questaoFaces.carregarArquivo}" 
+                                              mode="simple"  
+                                              label="Procurar" 
+                                              fileLimit="1" 
+                                              fileLimitMessage="Limite Máximo de 2MB" 
+                                              sizeLimit="200000" 
+                                              allowTypes="/(\.|\/)(gif|jp??g|png)$/" 
+                                              id="upload" 
+                                              
+                                              
+                                              />
+                                
+                                
+                           
 
-                            <p:inputTextarea value="#{provaFaces.selectedQuestao.texto}" rendered="#{provaFaces.renderCompText}" cols="50"/>
-
-                            <p:fileUpload value="#{provaFaces.carregarArquivo}" mode="simple" sizeLimit="10000" allowTypes="*.jpg;*.png;*.gif" id="mostrar" rendered="#{provaFaces.renderCompUpload}" />
                         </h:panelGrid>
+                            <p:commandButton value="Gravar" action="#{questaoFaces.addQuestao()}" ajax="false" />
+                            
+                            
+                        </p:fieldset>
                     </h:form>
 
                 </f:view>

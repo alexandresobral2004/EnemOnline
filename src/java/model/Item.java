@@ -23,17 +23,30 @@ import javax.persistence.Table;
 public class Item implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+     @Column(nullable = true)
     private String item;
-    private Boolean tipo;
     @Column(nullable = true)
     private String textoitemQuestao;
     @Column(nullable = true)
-    private byte[] imagem;
     private Boolean resposta;
+    @Column(nullable = true)
+    private String nomeImagem;
     @ManyToOne()
     private Questao questao;
 
+    
+    
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
+
+    
+    
     public Questao getQuestao() {
         return questao;
     }
@@ -41,20 +54,17 @@ public class Item implements Serializable{
     public void setQuestao(Questao questao) {
         this.questao = questao;
     }
-    
-    
-    
-    
-    
-    
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
+    
+    
+
 
     public String getItem() {
         return item;
@@ -64,13 +74,7 @@ public class Item implements Serializable{
         this.item = item;
     }
 
-    public Boolean getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Boolean tipo) {
-        this.tipo = tipo;
-    }
+   
 
     public String getTextoitemQuestao() {
         return textoitemQuestao;
@@ -80,13 +84,6 @@ public class Item implements Serializable{
         this.textoitemQuestao = textoitemQuestao;
     }
 
-    public byte[] getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
-    }
 
     public Boolean getResposta() {
         return resposta;
