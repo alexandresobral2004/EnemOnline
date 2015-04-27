@@ -30,10 +30,10 @@ public class Questao implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String texto;
-    private Integer numQuestao;
+    private int numQuestao;
     @ManyToOne()
     private Disciplina disciplina;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "questao_id")
     private List<Item> itens;
 
@@ -75,13 +75,15 @@ public class Questao implements Serializable{
         this.texto = texto;
     }
 
-    public Integer getNumQuestao() {
+    public int getNumQuestao() {
         return numQuestao;
     }
 
-    public void setNumQuestao(Integer numQuestao) {
+    public void setNumQuestao(int numQuestao) {
         this.numQuestao = numQuestao;
     }
+
+    
 
     
 

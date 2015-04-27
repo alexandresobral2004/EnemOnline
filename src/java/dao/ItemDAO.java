@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import model.Item;
+import model.Questao;
 
 /**
  *
@@ -21,7 +22,7 @@ public class ItemDAO {
     
     public void addItem(Item item) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
-        em.persist(item);
+         em.persist(item);
     }
 
     public void editItem(Item item) {

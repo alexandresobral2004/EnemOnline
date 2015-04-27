@@ -11,12 +11,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import model.Item;
 import model.Prova;
 import model.Questao;
@@ -33,8 +37,10 @@ public class QuestaoFaces implements Serializable{
     
     private Prova selectedProva;
     private Questao selectedQuestao;
-    //Itens da prova
+    private List<Questao> questoes;
+//Itens da prova
     private Item selectedItem;
+    
    
     
     //Componentes para renderização
@@ -45,9 +51,7 @@ public class QuestaoFaces implements Serializable{
     //Chamada dos DAO's
     @EJB
     private QuestaoDAO questaoDAO;
-    @EJB
-    private ItemDAO itemDAO;
-
+   
   
     
     public Boolean getRenderCompUpload() {
@@ -64,6 +68,14 @@ public class QuestaoFaces implements Serializable{
 
     public void setRenderCompText(Boolean renderCompText) {
         this.renderCompText = renderCompText;
+    }
+
+    public List<Questao> getQuestoes() {
+        return questoes;
+    }
+
+    public void setQuestoes(List<Questao> questoes) {
+        this.questoes = questoes;
     }
     
     
@@ -110,7 +122,7 @@ public class QuestaoFaces implements Serializable{
         this.selectedQuestao = new Questao();
        //Instancia itens das questoes
         this.selectedItem = new Item();
-        
+        incrementaNumQuestao();
       
         System.out.println("Inicia Questão");
         return "/pages/questao.jsf";
@@ -118,44 +130,49 @@ public class QuestaoFaces implements Serializable{
     
     public QuestaoFaces() {
         this.selectedProva = new Prova();
-                
         
     }
     
     
     public void addQuestao(){
-      
-        
-        
+      // incrementaNumQuestao();
         questaoDAO.addquestao(selectedQuestao);
-        this.itemDAO.addItem(selectedItem);
+        
+        
         System.out.println("Questão Inserida");
     }
     
     
-    public void alteraComponente(){
-        System.out.println("chamou altera componente");
-        if(this.selectCheckbox == true){
-            this.renderCompUpload = true;
-            this.renderCompText = false;
-        }
-        else{
-            this.renderCompText = true;
-             this.renderCompUpload = false;
-        }
-    }
+  
     
     public int findNumQuestao(){
-        int num = questaoDAO.getNumQuestao().getNumQuestao();
-        return num;
+      int num = questaoDAO.getUltimaQuestao();
+       return num;
+       
     }
     
     
-    public void incNumQuestao(){
-        int num = findNumQuestao();
-        if(num == 0){
-            this.selectedQuestao.setNumQuestao(1);
-            
+    
+   // FacesContext fc = FacesContext.getCurrentInstance();
+    //HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+    //Integer valor = session.setAttribute(this.selectedQuestao.getNumQuestao());
+    
+    /*   RECUPERANDO VALOR
+    HttpServletRequest request = (HttpServletRequest) req;
+    HttpSession session = (HttpSession) request.getSession();
+    Integer idUsuarioSession = session.getAttribute("NUM");*/
+    
+   
+    
+    
+    public void incrementaNumQuestao(){
+        
+        
+        Integer num = findNumQuestao();
+        if(num.equals(0)){
+            num = 1;
+          this.selectedQuestao.setNumQuestao(num);
+        
         }
         else{
            
@@ -163,29 +180,17 @@ public class QuestaoFaces implements Serializable{
             this.selectedQuestao.setNumQuestao(num);
             
         }
+        
     }
     
     
-   private  FacesMessage msg = null;
-    
-    
-    public void carregarArquivo(FileUploadEvent event) // metodo chamado quando o arquivo acaba de carregar no serverSide
-            throws FileNotFoundException, IOException {
-
-     this.msg = new FacesMessage("Sucesso " + event.getFile().getFileName() + " foi carregado.", event.getFile()
-                .getFileName() + " foi carregado."); // mensagem pra saber se ouve sucesso
-
-       String arquivo = event.getFile().getFileName(); // pego o nome do arquivo
+   
+    public List<Questao> findAllQuestaoes(){
+        questoes = new ArrayList<>();
+        questoes = questaoDAO.getAllQuestoes();
         
-        String caminho = FacesContext.getCurrentInstance().getExternalContext()
-                .getRealPath("WEB-INF//fotos//" + arquivo); // diretorio o qual vou salvar o arquivo do upload, equivale ao nome completamente qualificado
-
-        byte[] conteudo = event.getFile().getContents();  // daqui pra baixo é somente operações de IO.
-        FileOutputStream fos = new FileOutputStream(caminho);
-        fos.write(conteudo);
-        fos.close();
+        return questoes;
         
-
     }
     
   

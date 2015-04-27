@@ -130,12 +130,12 @@ public class JPAUtil {
     }
       
       
-      public <T>  T getNumQuestao(Class<T> entityClass,String jpql){
+      public int getNumQuestao(String jpql){
        em = getEntityManager();
-        T toReturn  = null;
-        Query query = em.createNativeQuery(jpql, entityClass);
-        toReturn = (T) query.getSingleResult();
-        return toReturn;
+        Integer result = null;
+        Query query = em.createQuery(jpql);
+        result = (Integer) query.getSingleResult();
+        return result;
     }
       
       

@@ -18,8 +18,8 @@
                             <f:facet name="header">
                                 Cadastro de Questões
                             </f:facet>
-                            <h:outputText value="Cód. Questão.:"/>
-                            <h:inputText value="#{questaoFaces.selectedQuestao.numQuestao}"/>
+                            <h:outputText value="Núm. Questão.:"/>
+                            <p:inputText value="#{questaoFaces.selectedQuestao.numQuestao}" disabled="true"/>
                             <h:outputText value="Disciplina.:"/>
                             <p:selectOneMenu value="#{questaoFaces.selectedQuestao.disciplina}" converter="DisciplinaConverter" >
 
@@ -32,39 +32,11 @@
 
 
                         </h:panelGrid>
-                        <p:fieldset legend="Item a" toggleable="true" toggleSpeed="500">
-                            <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}"  />
-                            <h:panelGrid columns="2" cellpadding="5">
-                                <f:facet name="header">
-                                    Insira uma imagem ou o texto relativo ao ítem (a) da questão
-                                </f:facet>
-                                <h:outputText value="Item da Questão.:" />
-                                <p:inputText value="#{questaoFaces.selectedItem.item}"  size="1" maxlength="1"/>
-                                <h:outputText value="Item Correto?"/>
-                                <p:selectBooleanCheckbox value="#{questaoFaces.selectedItem.resposta}" />
-                                <h:inputHidden/><h:inputHidden/>
-                                <p:inputTextarea value="#{questaoFaces.selectedItem.textoitemQuestao}"  cols="50" id="input"/>
-                           
-                                <p:fileUpload fileUploadListener="#{questaoFaces.carregarArquivo}" 
-                                              mode="simple"  
-                                              label="Procurar" 
-                                              fileLimit="1" 
-                                              fileLimitMessage="Limite Máximo de 2MB" 
-                                              sizeLimit="200000" 
-                                              allowTypes="/(\.|\/)(gif|jp??g|png)$/" 
-                                              id="upload" 
-                                              
-                                              
-                                              />
-                                
-                                
-                           
-
-                        </h:panelGrid>
+                        
                             <p:commandButton value="Gravar" action="#{questaoFaces.addQuestao()}" ajax="false" />
                             
                             
-                        </p:fieldset>
+                       
                     </h:form>
 
                 </f:view>

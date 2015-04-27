@@ -21,7 +21,7 @@ public class QuestaoDAO {
     
     public void addquestao(Questao questao){
         EntityManager em = JPAUtil.getInstance().getEntityManager();
-        em.persist(questao);
+        em.merge(questao);
     }
     
     public void editQuestao(Questao questao){
@@ -38,12 +38,13 @@ public class QuestaoDAO {
         return JPAUtil.getInstance().getEntity(Questao.class, id);
     }
     
-    public List<Questao> getAllQuestaos(){
+    public List<Questao> getAllQuestoes(){
         return JPAUtil.getInstance().getList(Questao.class, "SELECT a FROM Questao a");
     }
     
-    public Questao getNumQuestao(){
-        return JPAUtil.getInstance().getNumQuestao(Questao.class, "SELECT MAX(numquestao) FROM questao");   
+    public int getUltimaQuestao(){
+        Integer result  = JPAUtil.getInstance().getNumQuestao("select max(q.numQuestao) from Questao q");   
+        return result;
     }
   
     

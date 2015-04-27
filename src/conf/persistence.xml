@@ -8,7 +8,7 @@
     <class>model.Prova</class>
     <class>model.Questao</class>
     <class>model.prova_questao</class>
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
@@ -16,7 +16,7 @@
       <property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JTATransactionFactory"/>
       <property name="hibernate.connection.autocommit" value="true"/>
       <property name="eclipselink.jdbc.native-sql" value="true"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>
