@@ -185,7 +185,7 @@ public class QuestaoFaces implements Serializable{
     
     
    
-    public List<Questao> findAllQuestaoes(){
+    public List findAllQuestaoes(){
         questoes = new ArrayList<>();
         questoes = questaoDAO.getAllQuestoes();
         

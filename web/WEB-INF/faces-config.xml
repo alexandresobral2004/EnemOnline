@@ -11,4 +11,8 @@
         <converter-id>DisciplinaConverter</converter-id>
         <converter-class>Converter.DisciplinaConverter</converter-class>
     </converter>
+    <converter>
+        <converter-id>QuestaoConverter</converter-id>
+        <converter-class>Converter.QuestaoConverter</converter-class>
+    </converter>
 </faces-config>
