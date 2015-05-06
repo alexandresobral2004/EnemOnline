@@ -14,7 +14,7 @@
                 <f:view>
                     <h:form id="form" enctype="multipart/form-data">
 
-                        <h:panelGrid columns="2" id="pnlQuestao">
+                        <p:panelGrid columns="2" id="pnlQuestao">
                             <f:facet name="header">
                                 Cadastro de Questões
                             </f:facet>
@@ -31,9 +31,13 @@
                             <h:inputTextarea value="#{questaoFaces.selectedQuestao.texto}" rows="4" cols="50" id="txtQuestao" />
 
 
-                        </h:panelGrid>
-                        
+                        </p:panelGrid>
+                        <br/>
+                        <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
+                            <p:commandButton value="Novo" action="#" ajax="false"/>
                             <p:commandButton value="Gravar" action="#{questaoFaces.addQuestao()}" ajax="false" />
+                        </p:panel>
+                            
                             
                             
                        
