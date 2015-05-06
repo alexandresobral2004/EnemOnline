@@ -166,8 +166,6 @@ public class QuestaoFaces implements Serializable{
     
     
     public void incrementaNumQuestao(){
-        
-        
         Integer num = findNumQuestao();
         if(num.equals(0)){
             num = 1;

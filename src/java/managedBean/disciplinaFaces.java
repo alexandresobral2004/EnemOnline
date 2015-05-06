@@ -10,8 +10,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import model.Disciplina;
 
 /**
@@ -64,7 +66,10 @@ public class disciplinaFaces implements Serializable{
     
     
     public void addDisciplina(){
+         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Disciplina Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
+         FacesContext.getCurrentInstance().addMessage("message", message);
         disciDAO.adddisciplina(selectedDisci);
+        selectedDisci = new Disciplina();
     }
     
     

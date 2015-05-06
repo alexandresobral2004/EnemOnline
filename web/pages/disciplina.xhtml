@@ -11,15 +11,16 @@
         <ui:composition template="./../Template.xhtml">
 
             <ui:define name="content">
-                <h:form>
-                    <h:panelGrid columns="2" id="pnlDisci">
+                <h:form id="disci">
+                   
+                       <p:panelGrid columns="2" id="pnlDisci">
                         <f:facet name="header">
                             Cadastro de Disciplinas
                         </f:facet>
                         <h:outputText value="Nome da Discplina.:"/>
                         <p:inputText value="#{disciplinaFaces.selectedDisci.nome}"/>
-                    </h:panelGrid>
-                    <p:commandButton value="Gravar" action="#{disciplinaFaces.addDisciplina()}" ajax="false"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Gravar" action="#{disciplinaFaces.addDisciplina()}" ajax="false" update="disci:message"/>
                     
                 </h:form>
             </ui:define>
