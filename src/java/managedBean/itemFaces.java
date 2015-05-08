@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import static java.util.Collections.list;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -170,6 +171,19 @@ public class itemFaces implements Serializable {
 
     }
     
+    public boolean verificaItem(){
+        int num = this.selectQuestao.getId();
+        List <Item> itens = itemDAO.getItemsQuestao(num);
+        if(itens.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+        
+    }
+    
     public void preencheItemImagem() {
 
         this.selectItem_a.setNomeImagem(this.newFileName_A);
@@ -180,17 +194,54 @@ public class itemFaces implements Serializable {
 
     }
     
-    
+     public void newItem() {
+        selectItem_a = new Item();
+        selectItem_b = new Item();
+        selectItem_c = new Item();
+        selectItem_d = new Item();
+        selectItem_e = new Item();
+        selectQuestao = new Questao();
+       
+
+        
+    }
+     //COLOCAR IF ANINHADO COM CONTADOR, EVITAR MARCAR MAIS DE UMA RESPOSTA CORRETA
+     public boolean validaItemCorreto(Item item_a,Item item_b,Item item_c,Item item_d,Item item_e){
+         Integer teste = 0;
+         if((item_a.getResposta().booleanValue() == false)  && (item_b.getResposta().booleanValue() == false) && (item_c.getResposta().booleanValue() == false) && (item_d.getResposta().booleanValue() == false) && (item_e.getResposta().booleanValue() == false)){
+            return false; 
+         }
+         else{
+             return true;
+         }
+       
+         
+     }
     
 
     public void addItem() {
-        preencheQuestao();
-        preencheItemImagem();
-        itemDAO.addItem(selectItem_a);
-        itemDAO.addItem(selectItem_b);
-        itemDAO.addItem(selectItem_c);
-        itemDAO.addItem(selectItem_d);
-        itemDAO.addItem(selectItem_e);
+        preencheQuestao();//Seta a questao nos itens
+        preencheItemImagem(); //Seta o nome da imagem ao item 
+        boolean valida =  verificaItem();//Verifica se já existem ítens na questão e se houver não grava
+        boolean itemCorreto = validaItemCorreto(selectItem_a, selectItem_b, selectItem_c, selectItem_d, selectItem_e);
+        int numQuestao = selectQuestao.getNumQuestao();
+        
+        
+        if((valida==true) && (itemCorreto==true)){
+            itemDAO.addItem(selectItem_a);
+            itemDAO.addItem(selectItem_b);
+            itemDAO.addItem(selectItem_c);
+            itemDAO.addItem(selectItem_d);
+            itemDAO.addItem(selectItem_e);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ítens Gravados com Sucesso", "Dados Gravados Com Sucesso!!");
+            FacesContext.getCurrentInstance().addMessage("message", message);
+        }
+        else{
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "A questão "+String.valueOf(numQuestao)+" já possui ítens cadastrados ou você não selecionou um ítem correto.", "Dados não Gravados!!");
+            FacesContext.getCurrentInstance().addMessage("message", message);
+        }
+        
+        
         System.out.println("Itens Inseridos");
 
     }

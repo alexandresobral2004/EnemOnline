@@ -86,11 +86,11 @@ public class JPAUtil {
         return toReturn;
     }
     
-      public <T> List<T> getEscolasByMunic(Class<T> entityClass,String jpql, int mun){
+      public <T> List<T> getItensByQuestao(String jpql, int id){
       em = getEntityManager();
         List toReturn = null;
-        Query query = em.createNativeQuery(jpql, entityClass);
-        query.setParameter("mun", mun);
+        Query query = em.createQuery(jpql);
+        query.setParameter("id", id);
         toReturn = query.getResultList();
        
        

@@ -12,9 +12,11 @@
 
             <ui:define name="content" >
                 <h:form id="item" enctype="multipart/form-data" >
+                    <p:messages id="message"/>
                     <p:panelGrid columns="2">
                          <h:outputText value="Número da questão.:"/>
-                        <p:selectOneMenu value="#{itemFaces.selectQuestao}" converter="QuestaoConverter">
+                         <p:selectOneMenu value="#{itemFaces.selectQuestao}"  converter="QuestaoConverter">
+                            
                             <f:selectItems var="q" value="#{questaoFaces.findAllQuestaoes()}" itemLabel="#{q.numQuestao}" itemValue="#{q}"/>
 
                         </p:selectOneMenu>
@@ -130,11 +132,11 @@
                     </p:fieldset>
                    <br/>
                    <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
-                        <p:commandButton action="#" value="Novo" ajax="false"/>
-                        <p:commandButton action="#{itemFaces.addItem()}" value="Gravar" ajax="false" />
+                       <p:commandButton action="#{itemFaces.newItem()}" value="Novo" ajax="false"/>
+                       <p:commandButton action="#{itemFaces.addItem()}" value="Gravar" ajax="false" update="item:message" />
                    </p:panel>
                       
-                   
+
                   
                 </h:form>
             </ui:define>

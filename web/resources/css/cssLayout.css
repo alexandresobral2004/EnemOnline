@@ -1,17 +1,17 @@
 
 #top {
     position: relative;
-    background-color: #FFFFFF;
+    background-color: #dddddd;
     color: white;
-    padding: 5px;
-    margin: 0px 0px 10px 0px;
+    padding: 2px;
+    margin: 0px 57px 10px 57px;
 }
 
 #bottom {
     position: relative;
     background-color: #c2dfef;
     padding: 5px;
-    margin: 10px 0px 0px 0px;
+    margin: 10px 57px 0px 57px;
 }
 
 #left {
@@ -32,12 +32,15 @@
     position: relative;
     background-color: #dddddd;
     padding: 5px;
+    height: 80%;/*Mapeia o tamanho do index */
+    margin: 0px 57px 0px 57px;
 }
 
 .left_content {
     background-color: #dddddd;
     padding: 5px;
     margin-left: 170px;
+    height: 80%;
 }
 
 .right_content {

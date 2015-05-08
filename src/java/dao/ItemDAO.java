@@ -43,4 +43,9 @@ public class ItemDAO {
     public List<Item> getAllItems() {
         return JPAUtil.getInstance().getList(Item.class, "SELECT a FROM Item a");
     }
+    
+     public List<Item> getItemsQuestao(int id) {
+        return JPAUtil.getInstance().getItensByQuestao("SELECT i FROM Item i where i.questao.id=:id ", id);
+    }
+    
 }

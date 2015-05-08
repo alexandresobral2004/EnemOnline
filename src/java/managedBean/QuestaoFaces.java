@@ -134,14 +134,22 @@ public class QuestaoFaces implements Serializable{
     }
     
     
+    
     public void addQuestao(){
-      // incrementaNumQuestao();
+      
+         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Questão Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
+         FacesContext.getCurrentInstance().addMessage("message", message);
         questaoDAO.addquestao(selectedQuestao);
         
         
         System.out.println("Questão Inserida");
     }
     
+    public void newQuestao(){
+       
+      this.selectedQuestao = new Questao();
+      incrementaNumQuestao();
+    }
     
   
     

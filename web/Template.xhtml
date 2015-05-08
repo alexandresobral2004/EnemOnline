@@ -8,12 +8,13 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-       <!-- <h:outputStylesheet name="./css/default.css"/>
+        <!--  <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>-->
+     
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
 
-        <title>Facelets Template</title>
+        <title>ENEM Online</title>
     </h:head>
 
     <h:body>
@@ -21,13 +22,13 @@
         <div id="top" class="top">
             <ui:insert name="top">
                 
-                <p:panel style="background: #cccccc;text-align: center"  header="Enem Online - CED" >
+                <p:panel  style="text-align: center" header="Enem Online - CED" >
              <andii:componenteJSF id="meu" />
             </p:panel>
             </ui:insert>
         </div>
 
-        <div id="content" class="center_content">
+        <div id="content" class="center_content" style="height: 40%; background-color: #ffffff">
             <ui:insert name="content">
             
             </ui:insert>
