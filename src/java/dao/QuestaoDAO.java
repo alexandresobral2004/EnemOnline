@@ -39,7 +39,7 @@ public class QuestaoDAO {
     }
     
     public List<Questao> getAllQuestoes(){
-        return JPAUtil.getInstance().getList(Questao.class, "SELECT a FROM Questao a");
+        return JPAUtil.getInstance().getList(Questao.class, "SELECT a FROM Questao a order by a.id desc");
     }
     
     public int getUltimaQuestao(){

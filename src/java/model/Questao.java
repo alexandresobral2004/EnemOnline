@@ -29,11 +29,12 @@ public class Questao implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 2000)
     private String texto;
     private int numQuestao;
     @ManyToOne()
     private Disciplina disciplina;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "questao_id")
     private List<Item> itens;
 

@@ -63,25 +63,19 @@ public class disciplinaFaces implements Serializable{
     }
     
     
-    
-    
-    public void addDisciplina(){
-         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Disciplina Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
-         FacesContext.getCurrentInstance().addMessage("message", message);
+       public void addDisciplina() {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Disciplina Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
+        FacesContext.getCurrentInstance().addMessage("message", message);
         disciDAO.adddisciplina(selectedDisci);
         selectedDisci = new Disciplina();
     }
-    
-    
-    public List findAllDisciplinas(){
-        this.disciplinas = new ArrayList();
+
+    public List findAllDisciplinas() {
+        this.disciplinas = null;
         this.disciplinas = disciDAO.findAllDisciplinas();
-        
         return disciplinas;
-           
         
-       
-        
+
     }
     
 }

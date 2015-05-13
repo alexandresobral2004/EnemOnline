@@ -6,6 +6,7 @@
 package managedBean;
 
 import dao.ItemDAO;
+import dao.QuestaoDAO;
 import java.io.File;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
@@ -40,10 +41,13 @@ public class itemFaces implements Serializable {
     private String newFileName_C;
     private String newFileName_D;
     private String newFileName_E;
+    private List<Questao> questoes;
     
     
     @Inject
     ItemDAO itemDAO;
+    @Inject
+    QuestaoDAO questaoDAO;
 
     public String startItem() {
         selectItem_a = new Item();
@@ -53,6 +57,7 @@ public class itemFaces implements Serializable {
         selectItem_e = new Item();
         selectQuestao = new Questao();
         preencheItemQuestao();
+        carregaQuestoes();
 
         System.out.println("Cadastro de Itens iniciado");
         return "/pages/Itens.jsf";
@@ -146,6 +151,19 @@ public class itemFaces implements Serializable {
         this.newFileName_E = newFileName_E;
     }
 
+    public List<Questao> getQuestoes() {
+        return questoes;
+    }
+
+    public void setQuestoes(List<Questao> questoes) {
+        this.questoes = questoes;
+    }
+    
+    
+    public void carregaQuestoes(){
+        this.questoes = null;
+        this.questoes = questaoDAO.getAllQuestoes();
+    }
   
     public void preencheItemQuestao() {
         this.selectItem_a.setItem("a");
@@ -227,12 +245,14 @@ public class itemFaces implements Serializable {
         int numQuestao = selectQuestao.getNumQuestao();
         
         
+        
         if((valida==true) && (itemCorreto==true)){
             itemDAO.addItem(selectItem_a);
             itemDAO.addItem(selectItem_b);
             itemDAO.addItem(selectItem_c);
             itemDAO.addItem(selectItem_d);
             itemDAO.addItem(selectItem_e);
+            carregaQuestoes();//
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ítens Gravados com Sucesso", "Dados Gravados Com Sucesso!!");
             FacesContext.getCurrentInstance().addMessage("message", message);
         }

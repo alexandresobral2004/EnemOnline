@@ -16,14 +16,14 @@
 
 #left {
     float: left;
-    background-color: #ece3a5;
+    background-color: #ffffff;
     padding: 5px;
     width: 150px;
 }
 
 #right {
     float: right;
-    background-color: #ece3a5;
+    background-color: #ffffff;
     padding: 5px;
     width: 150px;
 }
@@ -46,7 +46,8 @@
 .right_content {
     background-color: #dddddd;
     padding: 5px;
-    margin: 0px 170px 0px 170px;
+    margin: 10px 170px 0px 170px;
+    text-align: center;
 }
 
 #top a:link, #top a:visited {

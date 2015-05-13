@@ -17,7 +17,7 @@
                          <h:outputText value="Número da questão.:"/>
                          <p:selectOneMenu value="#{itemFaces.selectQuestao}"  converter="QuestaoConverter">
                             
-                            <f:selectItems var="q" value="#{questaoFaces.findAllQuestaoes()}" itemLabel="#{q.numQuestao}" itemValue="#{q}"/>
+                             <f:selectItems var="q" value="#{itemFaces.questoes}" itemLabel="#{q.id}" itemValue="#{q}"/>
 
                         </p:selectOneMenu>
                     </p:panelGrid>

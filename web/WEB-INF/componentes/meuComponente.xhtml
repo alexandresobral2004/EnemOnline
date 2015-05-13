@@ -12,9 +12,18 @@
             <p:menubar autoDisplay="false">
               
                 <p:submenu label="Cadastros">
-                    <p:menuitem value="Nova Questão"   action="#{questaoFaces.startQuestao()}" ajax="false" />
-                    <p:menuitem value="Adicionar Itens"   action="#{itemFaces.startItem()}" ajax="false" />
-                    <p:menuitem value="Disciplina"   action="#{disciplinaFaces.startDisciplina()}" ajax="false" />         
+                    <p:submenu label="Questão">
+                            <p:menuitem value="Nova Questão"   action="#{questaoFaces.startQuestao()}" ajax="false" />
+                            <p:menuitem value="Adicionar Itens"   action="#{itemFaces.startItem()}" ajax="false" />
+                    </p:submenu>
+                    <p:submenu label="Disciplina">
+                         <p:menuitem value="Disciplina"   action="#{disciplinaFaces.startDisciplina()}" ajax="false" />         
+                    </p:submenu>
+                   
+                </p:submenu>
+                <p:submenu label="Questão">
+                    <p:menuitem value="ExibeQuestão"   action="#{exibeQuestaoFaces.startQuestao()}" ajax="false" />
+                           
                 </p:submenu>
 
 
