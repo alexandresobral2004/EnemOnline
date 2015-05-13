@@ -32,7 +32,7 @@
 
                         </p:panelGrid>
                         <br/>
-                       
+
 
                         <p:panel id="pnlbutton" style="text-align:  center;background-color: #AFAFAF">
                             <p:commandButton value="Novo" action="#{questaoFaces.newQuestao()}" ajax="false"/>
@@ -41,7 +41,12 @@
 
                         </p:panel>
                         <br/>
-                        <p:dataTable id="questoes" var="q" value="#{questaoFaces.questoes}" editable="true" style="margin-bottom:20px">
+                        <p:dataTable id="questoes" var="q" value="#{questaoFaces.questoes}" editable="true" style="margin-bottom:20px;text-align: center"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15" 
+
+                                     >
                             <f:facet name="header">
                                 Lista de Questões Cadastradas
                             </f:facet>
@@ -55,32 +60,59 @@
                                     <f:facet name="input"><p:inputText id="modelInput" value="#{q.id}" style="width:100%" disabled="true"/></f:facet>
                                 </p:cellEditor>
                             </p:column>
-                             <p:column headerText="Disciplina">
+                            <p:column headerText="Disciplina">
                                 <p:cellEditor>
                                     <f:facet name="output">
                                         <h:outputText value="#{q.disciplina.nome}" />
-                                    
+
                                     </f:facet>
-                              
-                                <f:facet name="input">
-                                    <h:selectOneMenu value="#{q.disciplina}" converter="DisciplinaConverter">
-                                        <f:selectItems value="#{disciplinaFaces.findAllDisciplinas()}"  var="d" itemLabel="#{d.nome}" itemValue="#{d}"/>
-                                    </h:selectOneMenu>
-                                </f:facet>
+
+                                    <f:facet name="input">
+                                        <h:selectOneMenu value="#{q.disciplina}" converter="DisciplinaConverter">
+                                            <f:selectItems value="#{disciplinaFaces.findAllDisciplinas()}"  var="d" itemLabel="#{d.nome}" itemValue="#{d}"/>
+                                        </h:selectOneMenu>
+                                    </f:facet>
                                 </p:cellEditor>
                             </p:column>
-                            <p:column style="width:160px" headerText="Editar - Apagar">
-                                
-                                <p:rowEditor /> 
-                                <h:outputText value="     -----      "/>
-                                <p:commandButton action="#{questaoFaces.delQuestao()}" value="Apagar"  ajax="false"  >
+                            
+                            <p:column headerText="Texto Questão" resizable="true">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{q.texto}" style="font-size: 11px" />
 
-                                    <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  /> 
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        
+                                        <p:inputTextarea value="#{q.texto}" autoResize="true" />
+                                    </f:facet>
+
+                                   
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="width:80px" headerText="Editar">
+
+                                <p:rowEditor /> 
+                            </p:column>
+                                 <p:column style="width:80px" headerText="Apagar">
+                                <p:commandButton value="Apagar"  update=":form:msgs,:form:questoes " action="#{questaoFaces.delQuestao()}" >
+                                    <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  />
+                                    <p:confirm header="Confirmation" message="Apagar Questão?" icon="ui-icon-alert"  />
+
                                 </p:commandButton>
+
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                    <p:commandButton    value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+
+
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+
+
+                                </p:confirmDialog>
+
 
                             </p:column>
 
-                          
+
                         </p:dataTable>
 
 
