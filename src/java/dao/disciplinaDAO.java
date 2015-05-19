@@ -6,6 +6,7 @@
 package dao;
 
 import Util.JPAUtil;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
 
@@ -17,30 +18,32 @@ import model.Disciplina;
  * @author cedsobral
  */
 @Stateless
-public class disciplinaDAO {
-    
-    
-    public void adddisciplina(Disciplina disciplina) {
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-        em.persist(disciplina);
+public class disciplinaDAO extends DAO <Disciplina, Long> implements Serializable{
+
+    public disciplinaDAO() {
+        super(Disciplina.class);
     }
     
-    public void editDisciplina(Disciplina disciplina){
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-        em.merge(disciplina);
+    
+    public void adddisciplina(Disciplina disciplina) throws Exception {
+        salvar(disciplina);
     }
-    public void delDisciplina(Disciplina disciplina){
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-        Disciplina a = em.merge(disciplina);
-        em.remove(a);
+    
+    public void editDisciplina(Disciplina disciplina) throws Exception{
+        atualizar(disciplina);
+    }
+    public void delDisciplina(Disciplina disciplina) throws Exception{
+        excluir(disciplina);
     }
     
     public Disciplina findDisciplinaByID(int id){
-        return JPAUtil.getInstance().getEntity(Disciplina.class, id);
+        Disciplina d = (Disciplina) getEntity(Disciplina.class, id);
+        return d;
     }
     
     public List<Disciplina> findAllDisciplinas(){
-        return JPAUtil.getInstance().getList(Disciplina.class, "SELECT d FROM Disciplina d");
+        List<Disciplina> disciplinas = getListaAll(Disciplina.class, "select d from Disciplina d");
+        return disciplinas;
     }
   
 }

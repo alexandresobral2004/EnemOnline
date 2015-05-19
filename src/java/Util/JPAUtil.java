@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 public class JPAUtil {
 
     private static JPAUtil me;
+    
+    @PersistenceContext(unitName = "PersistenceUnit")
     private EntityManager em;
 
     public JPAUtil() {
@@ -39,17 +41,17 @@ public class JPAUtil {
         return me;
     }
 
-    public EntityManager getEntityManager() {
+   /* public EntityManager getEntityManager() {
         FacesContext fc = FacesContext.getCurrentInstance();
         ExternalContext ec = fc.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) ec.getRequest();
         EntityManager toReturn = (EntityManager) request.getAttribute("EntityManager");
         return toReturn;
-    }
+    }*/
 
     public <T> List<T> getList(Class<T> classToClass, String jpql, Object... parameters) {
         List toReturn = null;
-        em = getEntityManager();
+       // em = getEntityManager();
         Query qr = em.createQuery(jpql);
 
         for (int i = 0; i < parameters.length; i++) {
@@ -62,14 +64,14 @@ public class JPAUtil {
     }
 
     public <T> T getEntity(Class<T> entityClass, Serializable pk) {
-        em = getEntityManager();
+        //em = getEntityManager();
         T toReturn = em.find(entityClass, pk);
 
         return toReturn;
     }
 
     public <T> List<T> getEntitiesById(Class<T> entityClass, String jpql, int id) {
-        em = getEntityManager();
+      //  em = getEntityManager();
         List toReturn = null;
         Query query = em.createNativeQuery(jpql, entityClass);
         query.setParameter("id", id);
@@ -78,10 +80,10 @@ public class JPAUtil {
         return toReturn;
     }
 
-    public <T> List<T> getItensByQuestao(String jpql, int id) {
-        em = getEntityManager();
+    public <T> List<T> getItensByQuestao(Class<T> entityClass,String jpql, int id) {
+       // em = getEntityManager();
         List toReturn = null;
-        Query query = em.createQuery(jpql);
+        Query query = em.createNamedQuery(jpql);
         query.setParameter("id", id);
         toReturn = query.getResultList();
 
@@ -89,7 +91,7 @@ public class JPAUtil {
     }
 
     public int getNumQuestao(String jpql) {
-        em = getEntityManager();
+       // em = getEntityManager();
         Integer result = null;
         Query query = em.createQuery(jpql);
         result = (Integer) query.getSingleResult();
@@ -97,9 +99,9 @@ public class JPAUtil {
     }
     
     public <T> List<T> getQuestaobyNUM(Class<T> entityClass,String jpql, int id){
-         em = getEntityManager();
+        // em = getEntityManager();
         List toReturn = null;
-        Query query = em.createNativeQuery(jpql,entityClass);
+       Query query = em.createNamedQuery(jpql);
         query.setParameter("id",id);
         
         toReturn = query.getResultList();

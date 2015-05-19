@@ -20,7 +20,7 @@ import javax.servlet.annotation.WebFilter;
  *
  * @author alexandrerocha
  */
-@WebFilter(servletNames={"Faces Servlet"})
+//@WebFilter(servletNames={"Faces Servlet"})
 public class JPAFilter implements Filter{
 
     private EntityManagerFactory factory;

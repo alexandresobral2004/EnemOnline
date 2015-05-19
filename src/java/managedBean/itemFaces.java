@@ -166,11 +166,11 @@ public class itemFaces implements Serializable {
     }
   
     public void preencheItemQuestao() {
-        this.selectItem_a.setItem("a");
-        this.selectItem_b.setItem("b");
-        this.selectItem_c.setItem("c");
-        this.selectItem_d.setItem("d");
-        this.selectItem_e.setItem("e");
+        this.selectItem_a.setItem("a)");
+        this.selectItem_b.setItem("b)");
+        this.selectItem_c.setItem("c)");
+        this.selectItem_d.setItem("d)");
+        this.selectItem_e.setItem("e)");
 
     }
     
@@ -237,7 +237,7 @@ public class itemFaces implements Serializable {
      }
     
 
-    public void addItem() {
+    public void addItem() throws Exception {
         preencheQuestao();//Seta a questao nos itens
         preencheItemImagem(); //Seta o nome da imagem ao item 
         boolean valida =  verificaItem();//Verifica se já existem ítens na questão e se houver não grava

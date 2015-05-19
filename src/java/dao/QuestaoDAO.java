@@ -6,6 +6,7 @@
 package dao;
 
 import Util.JPAUtil;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,36 +17,44 @@ import model.Questao;
  * @author cedsobral
  */
 @Stateless
-public class QuestaoDAO {
+public class QuestaoDAO extends DAO<Questao, Long> implements Serializable{
+
+    public QuestaoDAO() {
+        super(Questao.class);
+    }
    
     
-    public void addquestao(Questao questao){
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-        em.merge(questao);
+    public void addquestao(Questao questao) throws Exception{
+        
+        salvar(questao);
+        
     }
     
-    public void editQuestao(Questao questao){
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-        em.merge(questao);
+    public void editQuestao(Questao questao) throws Exception{
+        atualizar(questao);
+        
     }
-    public void delQuestao(Questao questao){
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-        Questao a = em.merge(questao);
-        em.remove(a);
+    public void delQuestao(Questao questao) throws Exception{
+        excluir(questao);
     }
     
     public Questao getQuestaoByID(int id){
-        return JPAUtil.getInstance().getEntity(Questao.class, id);
+        Questao q = (Questao) getEntity(Questao.class, id);
+        return q;
     }
     
     public List<Questao> getAllQuestoes(){
-        return JPAUtil.getInstance().getList(Questao.class, "SELECT a FROM Questao a order by a.id desc");
+        List<Questao> questoes = getListaAll(Questao.class, "SELECT q FROM Questao q");
+        return questoes;
     }
     
-    public int getUltimaQuestao(){
-        Integer result  = JPAUtil.getInstance().getNumQuestao("select max(q.numQuestao) from Questao q");   
-        return result;
-    }
+     public List<Questao> getQuestaoPorDiscip(int id){
+          List<Questao> questao = getQuestaobyDisciplina(Questao.class, "SELECT * FROM questao WHERE disciplina_id='"+id+"'",id);
+          
+          return questao;
+        
+     }
+      
   
     
     

@@ -152,7 +152,7 @@ public class QuestaoFaces implements Serializable{
     
     
     
-    public void addQuestao(){
+    public void addQuestao() throws Exception{
       
          FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Questão Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
          FacesContext.getCurrentInstance().addMessage("message", message);
@@ -172,13 +172,9 @@ public class QuestaoFaces implements Serializable{
     
   
     
-    public int findNumQuestao(){
-      int num = questaoDAO.getUltimaQuestao();
-       return num;
-       
-    }
     
-    public void editQuestao(RowEditEvent event) {
+    
+    public void editQuestao(RowEditEvent event) throws Exception {
         questaoDAO.editQuestao(selectedQuestao);
         selectedQuestao = new Questao();
         FacesMessage msg = new FacesMessage("Questão Editada",null);
@@ -199,7 +195,7 @@ public class QuestaoFaces implements Serializable{
     HttpSession session = (HttpSession) request.getSession();
     Integer idUsuarioSession = session.getAttribute("NUM");*/
     
-   public void delQuestao(){
+   public void delQuestao() throws Exception{
        questaoDAO.delQuestao(selectedQuestao);
        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN,"Questão Apagada com Sucesso", null);
        FacesContext.getCurrentInstance().addMessage("message", message);
@@ -207,21 +203,7 @@ public class QuestaoFaces implements Serializable{
    }
     
     
-    public void incrementaNumQuestao(){
-        Integer num = findNumQuestao();
-        if(num.equals(0)){
-            num = 1;
-          this.selectedQuestao.setNumQuestao(num);
-        
-        }
-        else{
-           
-            num+=1;
-            this.selectedQuestao.setNumQuestao(num);
-            
-        }
-        
-    }
+    
     
     
    

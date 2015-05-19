@@ -6,6 +6,7 @@
 package dao;
 
 import Util.JPAUtil;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,35 +18,38 @@ import model.Questao;
  * @author cedsobral
  */
 @Stateless
-public class ItemDAO {
+public class ItemDAO extends DAO<Item, Long> implements Serializable{
+
+    public ItemDAO() {
+        super(Item.class);
+    }
 
     
-    public void addItem(Item item) {
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-         em.persist(item);
+    public void addItem(Item item) throws Exception {
+        salvar(item);
     }
 
-    public void editItem(Item item) {
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-        em.merge(item);
+    public void editItem(Item item) throws Exception {
+        atualizar(item);
     }
 
-    public void delItem(Item item) {
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-        Item a = em.merge(item);
-        em.remove(a);
+    public void delItem(Item item) throws Exception {
+        excluir(item);
     }
 
     public Item getItemByID(int id) {
-        return JPAUtil.getInstance().getEntity(Item.class, id);
+        Item item  = getItemByID(id);
+        return item ;
     }
 
     public List<Item> getAllItems() {
-        return JPAUtil.getInstance().getList(Item.class, "SELECT a FROM Item a");
+       List<Item> itens = getListaAll(Item.class, "SELECT i From Item i");
+       return itens;
     }
-    
+    //"SELECT i FROM Item i where i.questao_id='"+id+"' ",id
      public List<Item> getItemsQuestao(int id) {
-        return JPAUtil.getInstance().getItensByQuestao("SELECT i FROM Item i where i.questao.id=:id ", id);
+        List<Item> itens = getItensByQuestao(Item.class,"select * from Item  where questao_id='"+id+"' order by item", id);
+        return itens;
     }
     
 }

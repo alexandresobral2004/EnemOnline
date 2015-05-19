@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import model.Disciplina;
 
 /**
@@ -28,7 +29,7 @@ public class disciplinaFaces implements Serializable{
     private List<Disciplina> disciplinas;
     
     
-    @EJB
+    @Inject
     private disciplinaDAO  disciDAO;
 
     
@@ -63,7 +64,7 @@ public class disciplinaFaces implements Serializable{
     }
     
     
-       public void addDisciplina() {
+       public void addDisciplina() throws Exception {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Disciplina Gravada com Sucesso", "Dados Gravados Com Sucesso!!");
         FacesContext.getCurrentInstance().addMessage("message", message);
         disciDAO.adddisciplina(selectedDisci);

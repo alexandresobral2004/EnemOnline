@@ -24,7 +24,7 @@ public class Item implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-     @Column(nullable = true)
+     @Column(nullable = true,length = 500)
     private String item;
     @Column(nullable = true)
     private String textoitemQuestao;

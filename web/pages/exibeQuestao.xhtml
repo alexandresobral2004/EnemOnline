@@ -23,21 +23,40 @@
                         </p:selectOneMenu>
                         
                     </p:panelGrid>
-                    <p:commandButton action="#{exibeQuestaoFaces.pegaQuestaoBanco()}" ajax="false" value="Carregar Questão"/>
+                    
+                     <br/>
                     <br/>
-                    <h:dataTable var="ques" value="#{exibeQuestaoFaces.questoes}" id="questoes">
-                        <h:column>
-                            <h:panelGrid columns="2">
-                                <h:outputText value="#{ques.numQuestao}) " />
-                                <h:outputText value="#{ques.texto}" />
-                                
-                            </h:panelGrid>
-                           
-                            
-                        </h:column>
+                    <p:commandButton action="#{exibeQuestaoFaces.carregaQuestao()}"  value="Carregar Questão" update="exibe:texto,exibe:itens" />
+                       
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    
+                    
+                    <h:outputText value="#{exibeQuestaoFaces.selectedQuestao.texto}" id="texto" /><br/><br/>
+                    <p:panelGrid columns="3" id="itens" >
+                        <h:outputText value="#{exibeQuestaoFaces.selectItem_a.item}"/>
+                         <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_a.resposta}" />
+                       <h:outputText value="#{exibeQuestaoFaces.selectItem_a.textoitemQuestao}" />
+                       <h:outputText value="#{exibeQuestaoFaces.selectItem_b.item}"/>
+                         <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_b.resposta}" />
+                       <h:outputText value="#{exibeQuestaoFaces.selectItem_b.textoitemQuestao}" />
+                      <h:outputText value="#{exibeQuestaoFaces.selectItem_c.item}"/>
+                         <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_c.resposta}" />
+                       <h:outputText value="#{exibeQuestaoFaces.selectItem_c.textoitemQuestao}" />
+                       <h:outputText value="#{exibeQuestaoFaces.selectItem_d.item}"/>
+                         <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_d.resposta}" />
+                       <h:outputText value="#{exibeQuestaoFaces.selectItem_d.textoitemQuestao}" />
+                       <h:outputText value="#{exibeQuestaoFaces.selectItem_e.item}"/>
+                         <p:selectBooleanCheckbox value="#{exibeQuestaoFaces.selectItem_e.resposta}" />
+                       <h:outputText value="#{exibeQuestaoFaces.selectItem_e.textoitemQuestao}" />
+ 
+                       
+                    </p:panelGrid>
+                    
 
-                       </h:dataTable> 
-
+                   
                    
                     
                 </h:form>
