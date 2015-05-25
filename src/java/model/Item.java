@@ -31,6 +31,8 @@ public class Item implements Serializable{
     @Column(nullable = true)
     private Boolean resposta;
     @Column(nullable = true)
+    private Boolean itemMarcado;
+    @Column(nullable = true)
     private String nomeImagem;
     @ManyToOne()
     private Questao questao;
@@ -92,6 +94,17 @@ public class Item implements Serializable{
     public void setResposta(Boolean resposta) {
         this.resposta = resposta;
     }
+
+    public Boolean getItemMarcado() {
+        return itemMarcado;
+    }
+
+    public void setItemMarcado(Boolean itemMarcado) {
+        this.itemMarcado = itemMarcado;
+    }
+    
+    
+    
 
     @Override
     public int hashCode() {

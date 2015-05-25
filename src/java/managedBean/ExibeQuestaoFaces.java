@@ -5,18 +5,18 @@
  */
 package managedBean;
 
-
 import dao.ItemDAO;
 import dao.QuestaoDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import model.Item;
 import model.Questao;
-
 
 /**
  *
@@ -24,26 +24,22 @@ import model.Questao;
  */
 @ManagedBean
 @SessionScoped
-public class ExibeQuestaoFaces implements Serializable{
-    
+public class ExibeQuestaoFaces implements Serializable {
+
     @Inject
     QuestaoDAO quesDAO;
     @Inject
     ItemDAO itemDAO;
-   
-    
+
     private Questao selectedQuestao;
-     private Item selectItem_a;
+    private Item selectItem_a;
     private Item selectItem_b;
     private Item selectItem_c;
     private Item selectItem_d;
     private Item selectItem_e;
     private List<Item> itens;
     private List<Questao> questoes;
-    
-    
-    
-   
+    private Boolean mostraquestao;
 
     public Questao getSelectedQuestao() {
         return selectedQuestao;
@@ -53,9 +49,6 @@ public class ExibeQuestaoFaces implements Serializable{
         this.selectedQuestao = selectedQuestao;
     }
 
-   
-    
-   
     public List<Item> getItens() {
         return itens;
     }
@@ -111,11 +104,17 @@ public class ExibeQuestaoFaces implements Serializable{
     public void setQuestoes(List<Questao> questoes) {
         this.questoes = questoes;
     }
-    
-    
-    
-    public String startQuestao(){
-      
+
+    public Boolean getMostraquestao() {
+        return mostraquestao;
+    }
+
+    public void setMostraquestao(Boolean mostraquestao) {
+        this.mostraquestao = mostraquestao;
+    }
+
+    public String startQuestao() {
+
         selectedQuestao = new Questao();
         this.selectItem_a = new Item();
         this.selectItem_b = new Item();
@@ -123,50 +122,85 @@ public class ExibeQuestaoFaces implements Serializable{
         this.selectItem_d = new Item();
         this.selectItem_e = new Item();
         this.itens = null;
-        
+        this.mostraquestao = false;
+
         System.out.println("Inicia Questao");
-        return "/pages/exibeQuestao.jsf";
-        
-        
+        return "/aluno/questoes.jsf";
+
     }
-    
-   public List<Questao> pegaQuestaoBanco(){
+
+    public List<Questao> pegaQuestaoBanco() {
         this.questoes = new ArrayList<Questao>();
-        System.out.println("ID da disciplina "+String.valueOf(selectedQuestao.getDisciplina().getID()));
+        System.out.println("ID da disciplina " + String.valueOf(selectedQuestao.getDisciplina().getID()));
         questoes = quesDAO.getQuestaoPorDiscip(selectedQuestao.getDisciplina().getID());
-         return questoes;
-       
+        return questoes;
+
+    }
+
+    public void carregaQuestao() {
+        List<Questao> lista = pegaQuestaoBanco();
+        this.selectedQuestao = lista.get(0);
+
+        preencheItens(selectedQuestao);
+        this.mostraquestao = true;
+    }
+
+    public void preencheItens(Questao q) {
+        this.itens = new ArrayList<>();
+
+        this.itens = itemDAO.getItemsQuestao(q.getId());
+        this.selectItem_a = this.itens.get(0);
+        this.selectItem_b = this.itens.get(1);
+        this.selectItem_c = this.itens.get(2);
+        this.selectItem_d = this.itens.get(3);
+        this.selectItem_e = this.itens.get(4);
+
+    }
+
+    public void mostraQuestao() {
+        this.mostraquestao = true;
+
     }
     
-     public void carregaQuestao(){
-         List<Questao> lista = pegaQuestaoBanco();
-         this.selectedQuestao = lista.get(0);
-         
-         preencheItens(selectedQuestao);
-       }
-     
     
-     
-     public void preencheItens(Questao q){
-         this.itens = new ArrayList<>();
-         
-         this.itens =  itemDAO.getItemsQuestao(q.getId());
-         this.selectItem_a = this.itens.get(0);
-          this.selectItem_b = this.itens.get(1);
-           this.selectItem_c = this.itens.get(2);
-            this.selectItem_d = this.itens.get(3);
-             this.selectItem_e = this.itens.get(4);
-         System.out.println(String.valueOf(selectItem_a.getItem()));
+    private Item getItemCorreto(){
+        for (int i = 0; i < itens.size(); i++) {
+            if (this.itens.get(i).getResposta()) {
+
+               return this.itens.get(i);
+                
+
+            }
+
+        } 
+        return null;
+        
+    }
+
+    public FacesMessage validaItemQuestao() {
+        Boolean acertou = false;
        
-     }
-    
+        for (int i = 0; i < itens.size(); i++) {
+            if (this.itens.get(i).getItemMarcado() && this.itens.get(i).getResposta()) {
 
-    
+                acertou = true;
+                
+
+            }
+
+        }
+
+        if (acertou) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Resposta Correta", null);
+            FacesContext.getCurrentInstance().addMessage("message", message);
+        } else {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resposta Incorreta, o ítem correto é o: "+this.getItemCorreto().getItem(), null);
+            FacesContext.getCurrentInstance().addMessage("message", message);
+
+        }
+
+        return null;
+
+    }
+
 }
-    
-    
-    
-    
-    
-    
-

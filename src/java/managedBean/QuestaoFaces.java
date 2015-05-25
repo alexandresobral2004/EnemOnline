@@ -176,7 +176,6 @@ public class QuestaoFaces implements Serializable{
     
     public void editQuestao(RowEditEvent event) throws Exception {
         questaoDAO.editQuestao(selectedQuestao);
-        selectedQuestao = new Questao();
         FacesMessage msg = new FacesMessage("Questão Editada",null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

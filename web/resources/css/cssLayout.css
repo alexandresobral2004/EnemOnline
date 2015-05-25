@@ -48,6 +48,23 @@
     padding: 5px;
     margin: 10px 170px 0px 170px;
     text-align: center;
+    background-size: 80%;
+ 
+    
+   
+   
+    
+}
+.right_content_INDEX {
+    background-color: #33CC66;
+    padding: 5px;
+    margin: 10px 170px 0px 170px;
+    text-align: center;
+    background-size: 80%;
+    
+   
+   
+    
 }
 
 #top a:link, #top a:visited {
@@ -61,5 +78,4 @@
   font-weight : bold;
   text-decoration : underline;
 }
-
 
