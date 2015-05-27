@@ -44,7 +44,7 @@
 }
 
 .right_content {
-    background-color: #dddddd;
+    background-color: bisque;
     padding: 5px;
     margin: 10px 170px 0px 170px;
     text-align: center;
@@ -79,3 +79,8 @@
   text-decoration : underline;
 }
 
+.ui-widget-content2 {
+    border: 1px solid #72B42D;
+    background:  repeat-x scroll 50% bottom #72B42D !important;
+    color: #FFF;
+}

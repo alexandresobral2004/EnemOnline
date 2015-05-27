@@ -44,7 +44,7 @@ public class QuestaoDAO extends DAO<Questao, Long> implements Serializable{
     }
     
     public List<Questao> getAllQuestoes(){
-        List<Questao> questoes = getListaAll(Questao.class, "SELECT q FROM Questao q");
+        List<Questao> questoes = getListaAll(Questao.class, "SELECT q FROM Questao q order by q.id desc");
         return questoes;
     }
     

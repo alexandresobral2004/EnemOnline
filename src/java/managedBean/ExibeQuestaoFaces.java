@@ -9,7 +9,10 @@ import dao.ItemDAO;
 import dao.QuestaoDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import static javafx.application.Platform.exit;
+import javafx.scene.control.CheckBox;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,7 +20,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import model.Item;
 import model.Questao;
-
+import org.primefaces.context.PrimeFacesContext;
+import org.primefaces.event.ItemSelectEvent;
 /**
  *
  * @author cedsobral
@@ -32,6 +36,7 @@ public class ExibeQuestaoFaces implements Serializable {
     ItemDAO itemDAO;
 
     private Questao selectedQuestao;
+    private Item selectItem;
     private Item selectItem_a;
     private Item selectItem_b;
     private Item selectItem_c;
@@ -40,11 +45,22 @@ public class ExibeQuestaoFaces implements Serializable {
     private List<Item> itens;
     private List<Questao> questoes;
     private Boolean mostraquestao;
+    static String imagem = "resources/imagem/topoced2.jpg";
 
     public Questao getSelectedQuestao() {
         return selectedQuestao;
     }
 
+    public Item getSelectItem() {
+        return selectItem;
+    }
+
+    public void setSelectItem(Item selectItem) {
+        this.selectItem = selectItem;
+    }
+
+    
+    
     public void setSelectedQuestao(Questao selectedQuestao) {
         this.selectedQuestao = selectedQuestao;
     }
@@ -113,6 +129,18 @@ public class ExibeQuestaoFaces implements Serializable {
         this.mostraquestao = mostraquestao;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
+    
+   
+    
+    
     public String startQuestao() {
 
         selectedQuestao = new Questao();
@@ -123,7 +151,10 @@ public class ExibeQuestaoFaces implements Serializable {
         this.selectItem_e = new Item();
         this.itens = null;
         this.mostraquestao = false;
-
+       
+        
+        
+       
         System.out.println("Inicia Questao");
         return "/aluno/questoes.jsf";
 
@@ -137,13 +168,7 @@ public class ExibeQuestaoFaces implements Serializable {
 
     }
 
-    public void carregaQuestao() {
-        List<Questao> lista = pegaQuestaoBanco();
-        this.selectedQuestao = lista.get(0);
-
-        preencheItens(selectedQuestao);
-        this.mostraquestao = true;
-    }
+   
 
     public void preencheItens(Questao q) {
         this.itens = new ArrayList<>();
@@ -191,10 +216,10 @@ public class ExibeQuestaoFaces implements Serializable {
         }
 
         if (acertou) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Resposta Correta", null);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resposta Correta, parabéns!!", null);
             FacesContext.getCurrentInstance().addMessage("message", message);
         } else {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resposta Incorreta, o ítem correto é o: "+this.getItemCorreto().getItem(), null);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resposta incorreta, o ítem correto é o :  ("+this.getItemCorreto().getItem(), null);
             FacesContext.getCurrentInstance().addMessage("message", message);
 
         }
@@ -202,5 +227,112 @@ public class ExibeQuestaoFaces implements Serializable {
         return null;
 
     }
+    
+    
+  
+    
+    
+    
+    
+    public void selectOneitem_a(){
+        if (this.selectItem_a.getItemMarcado()) {
+            this.selectItem_b.setItemMarcado(false);
+            this.selectItem_c.setItemMarcado(false);
+            this.selectItem_d.setItemMarcado(false);
+            this.selectItem_e.setItemMarcado(false);
+            
+        }
+    }
+    
+     public void selectOneitem_b() {
+        if (this.selectItem_b.getItemMarcado() == true) {
+            this.selectItem_a.setItemMarcado(false);
+            this.selectItem_c.setItemMarcado(false);
+            this.selectItem_d.setItemMarcado(false);
+            this.selectItem_e.setItemMarcado(false);
+            exit();
+        }
+    }
+
+    public void selectOneitem_c() {
+        if (this.selectItem_c.getItemMarcado() == true) {
+            this.selectItem_a.setItemMarcado(false);
+            this.selectItem_b.setItemMarcado(false);
+            this.selectItem_d.setItemMarcado(false);
+            this.selectItem_e.setItemMarcado(false);
+            exit();
+        }
+    }
+
+    public void selectOneitem_d() {
+        if (this.selectItem_d.getItemMarcado() == true) {
+            this.selectItem_a.setItemMarcado(false);
+            this.selectItem_b.setItemMarcado(false);
+            this.selectItem_c.setItemMarcado(false);
+            this.selectItem_e.setItemMarcado(false);
+            exit();
+        }
+    }
+
+    public void selectOneitem_e() {
+        if (this.selectItem_e.getItemMarcado() == true) {
+            this.selectItem_a.setItemMarcado(false);
+            this.selectItem_b.setItemMarcado(false);
+            this.selectItem_c.setItemMarcado(false);
+            this.selectItem_d.setItemMarcado(false);
+            exit();
+        }
+    }
+       
+       
+    
+    
+     private List<Questao> lista  = null;
+     
+    public void carregaQuestao() {
+        
+       this.lista = null;
+        this.lista = pegaQuestaoBanco();
+        this.selectedQuestao = this.lista.get(0);
+        System.out.println(String.valueOf(this.lista.size()));
+
+        preencheItens(selectedQuestao);
+        this.mostraquestao = true;
+
+    }
+
+   
+    int var = 0;
+    public void carregaNovaQuestao() {
+   
+        try {
+
+            if (this.var <= this.lista.size()) {
+                this.var++;
+                this.selectedQuestao = this.lista.get(this.var);
+                preencheItens(this.selectedQuestao);
+                this.mostraquestao = true;
+                
+            }
+            else{
+                this.var = 1;
+                this.lista = null;
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Questões Encerradas", null);
+            FacesContext.getCurrentInstance().addMessage("message", message);      
+            }
+        } 
+        catch (ArrayIndexOutOfBoundsException e){
+            this.lista = null;
+            
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Questões Encerradas", null);
+            FacesContext.getCurrentInstance().addMessage("message", message);          
+
+        }
+   
+        
+        
+        
+    }
+    
 
 }

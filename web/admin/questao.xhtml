@@ -54,13 +54,13 @@
                             <p:ajax event="rowEdit" listener="#{questaoFaces.editQuestao}" update=":form:msgs" />
                             <p:ajax event="rowEditCancel" listener="#{questaoFaces.onCancel}" update=":form:msgs" />
 
-                            <p:column headerText="Id" style="width:60px">
+                            <p:column headerText="Id" style="width:30px">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{q.id}" /></f:facet>
                                     <f:facet name="input"><p:inputText id="modelInput" value="#{q.id}" style="width:100%" disabled="true"/></f:facet>
                                 </p:cellEditor>
                             </p:column>
-                            <p:column headerText="Disciplina">
+                            <p:column headerText="Disciplina" style="width: 60px">
                                 <p:cellEditor>
                                     <f:facet name="output">
                                         <h:outputText value="#{q.disciplina.nome}" />
@@ -89,7 +89,7 @@
                                    
                                 </p:cellEditor>
                             </p:column>
-                            <p:column style="width:80px" headerText="Editar">
+                            <p:column style="width:40px" headerText="Editar">
 
                                 <p:rowEditor /> 
                             </p:column>
@@ -111,10 +111,19 @@
 
 
                             </p:column>
+                            
+                            
+                            <p:column style="width:80px" headerText="Ítens">
+                                <p:commandButton action="#{itemFaces.startItem()}" value="Add Ítem">
+                                 <f:setPropertyActionListener value="#{q}" target="#{questaoFaces.selectedQuestao}"  />
+                                </p:commandButton>
+                            </p:column>
 
 
                         </p:dataTable>
-
+                        
+                        
+                    
 
 
 

@@ -142,7 +142,7 @@ public class QuestaoFaces implements Serializable{
          findAllQuestaoes();//Carrega a lista de questões cadastradas
          carregaDisciplinas();//carrega a lista de disciplinas
         System.out.println("Inicia Questão");
-        return "/pages/questao.jsf";
+        return "/admin/questao.jsf";
     } 
     
     public QuestaoFaces() {

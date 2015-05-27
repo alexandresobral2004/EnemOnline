@@ -60,7 +60,7 @@ public class itemFaces implements Serializable {
         carregaQuestoes();
 
         System.out.println("Cadastro de Itens iniciado");
-        return "/pages/Itens.jsf";
+        return "/admin/Itens.jsf";
     }
 
     public Questao getSelectQuestao() {
@@ -166,11 +166,11 @@ public class itemFaces implements Serializable {
     }
   
     public void preencheItemQuestao() {
-        this.selectItem_a.setItem("a)");
-        this.selectItem_b.setItem("b)");
-        this.selectItem_c.setItem("c)");
-        this.selectItem_d.setItem("d)");
-        this.selectItem_e.setItem("e)");
+        this.selectItem_a.setItem("A)");
+        this.selectItem_b.setItem("B)");
+        this.selectItem_c.setItem("C)");
+        this.selectItem_d.setItem("D)");
+        this.selectItem_e.setItem("E)");
 
     }
     
@@ -237,12 +237,12 @@ public class itemFaces implements Serializable {
      }
     
 
-    public void addItem() throws Exception {
+    public String addItem() throws Exception {
         preencheQuestao();//Seta a questao nos itens
         preencheItemImagem(); //Seta o nome da imagem ao item 
         boolean valida =  verificaItem();//Verifica se já existem ítens na questão e se houver não grava
         boolean itemCorreto = validaItemCorreto(selectItem_a, selectItem_b, selectItem_c, selectItem_d, selectItem_e);
-        int numQuestao = selectQuestao.getNumQuestao();
+        int id = selectQuestao.getId();
         
         
         
@@ -257,12 +257,13 @@ public class itemFaces implements Serializable {
             FacesContext.getCurrentInstance().addMessage("message", message);
         }
         else{
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "A questão "+String.valueOf(numQuestao)+" já possui ítens cadastrados ou você não selecionou um ítem correto.", "Dados não Gravados!!");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "A questão "+String.valueOf(id)+" já possui ítens cadastrados ou você não selecionou um ítem correto.", "Dados não Gravados!!");
             FacesContext.getCurrentInstance().addMessage("message", message);
         }
         
         
         System.out.println("Itens Inseridos");
+        return "/admin/questao.jsf";
 
     }
 

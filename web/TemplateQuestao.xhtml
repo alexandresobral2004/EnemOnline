@@ -6,8 +6,10 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <!--<h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>-->
+         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <title>Facelets Template</title>
     </h:head>
 
@@ -21,7 +23,11 @@
                 <ui:insert name="right"></ui:insert>
             </div>
             <div id="content" class="right_content">
-                <ui:insert name="content"></ui:insert>
+               
+                <ui:insert name="content">
+                    
+                    
+                </ui:insert>
             </div>
         </div>
 
