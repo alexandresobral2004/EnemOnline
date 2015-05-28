@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import static javafx.application.Platform.exit;
 import javafx.scene.control.CheckBox;
 import javax.faces.application.FacesMessage;
@@ -290,7 +291,7 @@ public class ExibeQuestaoFaces implements Serializable {
      private List<Questao> lista  = null;
      
     public void carregaQuestao() {
-        
+        this.var = 0;
        this.lista = null;
         this.lista = pegaQuestaoBanco();
         this.selectedQuestao = this.lista.get(0);
@@ -304,8 +305,8 @@ public class ExibeQuestaoFaces implements Serializable {
    
     int var = 0;
     public void carregaNovaQuestao() {
-   
-        try {
+       
+             try {
 
             if (this.var <= this.lista.size()) {
                 this.var++;
@@ -318,7 +319,7 @@ public class ExibeQuestaoFaces implements Serializable {
                 this.var = 1;
                 this.lista = null;
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Questões Encerradas", null);
-            FacesContext.getCurrentInstance().addMessage("message", message);      
+                FacesContext.getCurrentInstance().addMessage("message", message);      
             }
         } 
         catch (ArrayIndexOutOfBoundsException e){

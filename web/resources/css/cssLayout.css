@@ -30,9 +30,10 @@
 
 .center_content {
     position: relative;
-    background-color: #dddddd;
+    //background-image: url("../imagem/backgroud_green.jpg");
+    background: #E6E6E6;
     padding: 5px;
-    height: 80%;/*Mapeia o tamanho do index */
+    height: 90%;/*Mapeia o tamanho do index */
     margin: 0px 57px 0px 57px;
 }
 
@@ -44,10 +45,10 @@
 }
 
 .right_content {
-    background-color: bisque;
+    background-color: #3f481e;
     padding: 5px;
     margin: 10px 170px 0px 170px;
-    text-align: center;
+    text-align: justify;
     background-size: 80%;
  
     
@@ -63,12 +64,10 @@
     background-size: 80%;
     
    
-   
-    
 }
 
 #top a:link, #top a:visited {
-  color: white;
+  color: #000000;
   font-weight : bold;
   text-decoration: none;
 }
@@ -83,4 +82,42 @@
     border: 1px solid #72B42D;
     background:  repeat-x scroll 50% bottom #72B42D !important;
     color: #FFF;
+}
+
+.padrao_entrada{
+    background-image: url("../imagem/planodefundo.jpg") ;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    
+   
+}
+
+.texto_entrada {
+  font-family: sans-serif;
+  text-align: right;
+  text-shadow: 2px 2px #F2F2F2;
+  text-decoration: #000000;
+  font-size: 35px;
+  margin: 20px 0px 0px 400px;
+  font-style: oblique;
+    
+}
+
+.imagem_enem_entrada {
+    width: 400px;
+    height: 180px;
+    margin: 600px 0px 0px 250px;
+    
+}
+
+#textoQuestao {
+    text-align: left !important;
+}
+
+.ui-panel .ui-panel-footer {
+   text-align: center !important; 
+}
+
+.ui-widget-header {
+   background:  #adb136 !important;  
 }
